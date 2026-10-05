@@ -1,1 +1,840 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MUSEUM TERNATE — Jejak Perlawanan</title>
+
+<meta name="description"
+content="Museum Digital Kesultanan Ternate dan sejarah perlawanan terhadap kekuatan kolonial dan VOC.">
+
+<style>
+/* =========================================================
+   RESET & VARIABLES
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:#f5f2ea;
+    font-family:Georgia, "Times New Roman", serif;
+    overflow-x:hidden;
+}
+
+:root{
+    --black:#050505;
+    --black2:#0b0b0a;
+    --white:#f5f2ea;
+    --gray:#aaa79f;
+    --gold:#c8a45d;
+    --gold2:#e1c982;
+    --darkgold:#80652f;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:22px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(5,5,5,.85);
+    backdrop-filter:blur(18px);
+    transition:.4s;
+}
+
+nav.scrolled{
+    padding:14px 6%;
+    background:rgba(5,5,5,.96);
+}
+
+.logo{
+    text-decoration:none;
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    letter-spacing:4px;
+    font-size:12px;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+    border:1px solid var(--gold);
+    display:grid;
+    place-items:center;
+    color:var(--gold);
+    font-size:17px;
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:35px;
+}
+
+.nav-links a{
+    color:#aaa;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--gold);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:150px 8% 100px;
+    overflow:hidden;
+    background:
+    radial-gradient(
+        circle at 75% 45%,
+        rgba(200,164,93,.15),
+        transparent 35%
+    ),
+    linear-gradient(
+        90deg,
+        #050505 0%,
+        #080807 55%,
+        #15120d 100%
+    );
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    right:-300px;
+    top:120px;
+    border:1px solid rgba(200,164,93,.25);
+    border-radius:50%;
+    box-shadow:
+    0 0 0 80px rgba(200,164,93,.025),
+    0 0 0 160px rgba(200,164,93,.018);
+}
+
+.hero::after{
+    content:"TERNATE";
+    position:absolute;
+    right:-40px;
+    bottom:40px;
+    font-size:12vw;
+    letter-spacing:10px;
+    color:rgba(255,255,255,.025);
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+.eyebrow{
+    color:var(--gold);
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:7px;
+    text-transform:uppercase;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(50px,8vw,120px);
+    font-weight:400;
+    line-height:.9;
+    letter-spacing:-4px;
+}
+
+.hero h1 span{
+    color:var(--gold);
+    font-style:italic;
+}
+
+.hero-subtitle{
+    margin-top:35px;
+    max-width:620px;
+    color:#aaa;
+    font-family:Arial,sans-serif;
+    font-size:14px;
+    line-height:2;
+}
+
+.hero-buttons{
+    margin-top:35px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 25px;
+    border:1px solid var(--gold);
+    color:white;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:.4s;
+}
+
+.btn.gold{
+    background:var(--gold);
+    color:#080706;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    background:var(--gold);
+    color:#050505;
+}
+
+.hero-year{
+    position:absolute;
+    right:8%;
+    bottom:80px;
+    color:rgba(200,164,93,.35);
+    font-size:90px;
+    font-style:italic;
+}
+
+/* =========================================================
+   SECTIONS GENERAL
+========================================================= */
+
+section{
+    padding:120px 8%;
+    position:relative;
+}
+
+.section-label{
+    color:var(--gold);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    margin-bottom:17px;
+}
+
+.section-title{
+    font-size:clamp(36px,5vw,72px);
+    line-height:1;
+    font-weight:400;
+    letter-spacing:-2px;
+}
+
+.section-title span{
+    color:var(--gold);
+    font-style:italic;
+}
+
+.section-description{
+    margin-top:25px;
+    max-width:700px;
+    color:#92908a;
+    font-family:Arial,sans-serif;
+    font-size:14px;
+    line-height:2;
+}
+
+/* =========================================================
+   MUSEUM INTRO (LOKASI & SINOPSIS)
+========================================================= */
+
+.intro{
+    background:#f1eee7;
+    color:#090909;
+}
+
+.intro .section-label{
+    color:#80652f;
+}
+
+.intro .section-title span{
+    color:#80652f;
+}
+
+.intro .section-description{
+    color:#56524b;
+}
+
+.intro-grid{
+    margin-top:65px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:60px;
+    align-items:center;
+}
+
+.museum-card{
+    min-height:420px;
+    padding:45px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg, #191510, #050505);
+    border:1px solid rgba(200,164,93,.35);
+    box-shadow:20px 20px 0 #80652f;
+    color:#f5f2ea;
+}
+
+.museum-card::before{
+    content:"XVI";
+    position:absolute;
+    right:-20px;
+    bottom:-30px;
+    font-size:180px;
+    color:rgba(255,255,255,.025);
+    pointer-events:none;
+}
+
+.card-number{
+    color:var(--gold);
+    font-size:55px;
+    font-style:italic;
+}
+
+.museum-card h3{
+    margin-top:25px;
+    font-size:32px;
+    font-weight:400;
+}
+
+.museum-card p{
+    margin-top:15px;
+    color:#aaa;
+    font-family:Arial,sans-serif;
+    line-height:1.9;
+    font-size:13px;
+}
+
+.location-list{
+    list-style:none;
+    margin-top:20px;
+}
+
+.location-list li{
+    margin-bottom:12px;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#aaa;
+}
+
+.location-list li::before{
+    content:"—";
+    color:var(--gold);
+}
+
+/* =========================================================
+   LATAR BELAKANG
+========================================================= */
+
+.background-section{
+    background:#080807;
+}
+
+.bg-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:25px;
+}
+
+.bg-card{
+    padding:35px;
+    background:#11100e;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.4s;
+}
+
+.bg-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.bg-card-num{
+    color:var(--gold);
+    font-size:14px;
+    font-family:Arial,sans-serif;
+    letter-spacing:2px;
+}
+
+.bg-card h3{
+    margin-top:15px;
+    font-size:22px;
+    font-weight:400;
+}
+
+.bg-card p{
+    margin-top:12px;
+    color:#888;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* =========================================================
+   TOKOH
+========================================================= */
+
+.figures{
+    background:#090909;
+}
+
+.figures-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.figure{
+    min-height:390px;
+    padding:35px;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(145deg, #11100e, #080808);
+    position:relative;
+    overflow:hidden;
+    transition:.5s;
+}
+
+.figure:hover{
+    transform:translateY(-10px);
+    border-color:var(--gold);
+}
+
+.figure::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    right:-100px;
+    bottom:-100px;
+    border-radius:50%;
+    border:1px solid rgba(200,164,93,.2);
+}
+
+.figure-number{
+    color:var(--gold);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:4px;
+}
+
+.figure h3{
+    margin-top:60px;
+    font-size:26px;
+    font-weight:400;
+}
+
+.figure .role{
+    color:var(--gold);
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    margin-top:5px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.figure p{
+    margin-top:15px;
+    color:#888;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    line-height:1.9;
+}
+
+/* =========================================================
+   TIMELINE (PROSES PERLAWANAN)
+========================================================= */
+
+.timeline{
+    background:#17110c;
+}
+
+.timeline-container{
+    margin-top:70px;
+    max-width:900px;
+}
+
+.timeline-item{
+    position:relative;
+    padding:0 0 65px 70px;
+}
+
+.timeline-line{
+    position:absolute;
+    left:11px;
+    top:0;
+    bottom:0;
+    width:1px;
+    background:rgba(200,164,93,.3);
+}
+
+.timeline-dot{
+    position:absolute;
+    left:4px;
+    top:4px;
+    width:16px;
+    height:16px;
+    border:1px solid var(--gold);
+    background:#17110c;
+    border-radius:50%;
+}
+
+.timeline-year{
+    color:var(--gold);
+    font-size:15px;
+    letter-spacing:2px;
+}
+
+.timeline-item h3{
+    margin-top:10px;
+    font-size:26px;
+    font-weight:400;
+}
+
+.timeline-item p{
+    margin-top:10px;
+    color:#aaa;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    line-height:1.9;
+    max-width:650px;
+}
+
+/* =========================================================
+   DAMPAK (VOC & KOLONIAL)
+========================================================= */
+
+.impact{
+    background:#050505;
+}
+
+.impact-box{
+    margin-top:60px;
+    padding:55px;
+    border:1px solid rgba(200,164,93,.3);
+    background:linear-gradient(135deg, rgba(200,164,93,.06), rgba(255,255,255,.01));
+}
+
+.impact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:45px;
+}
+
+.impact-point span{
+    font-size:45px;
+    color:var(--gold);
+    font-style:italic;
+}
+
+.impact-point h3{
+    margin-top:15px;
+    font-size:20px;
+    font-weight:400;
+}
+
+.impact-point p{
+    margin-top:10px;
+    color:#888;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    line-height:1.9;
+}
+
+/* =========================================================
+   SUMBER JURNAL
+========================================================= */
+
+.sources{
+    background:#090909;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.sources-list{
+    margin-top:40px;
+    list-style:none;
+}
+
+.sources-list li{
+    padding:20px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    color:#aaa;
+    line-height:1.8;
+}
+
+.sources-list li strong{
+    color:var(--gold);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:50px 8%;
+    background:#030303;
+    border-top:1px solid rgba(255,255,255,.05);
+    text-align:center;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    color:#666;
+    letter-spacing:2px;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width:1024px){
+    .figures-grid, .impact-grid{
+        grid-template-columns:1fr;
+    }
+    .intro-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media (max-width:768px){
+    nav{
+        padding:18px 5%;
+    }
+    .nav-links{
+        display:none;
+    }
+    .hero h1{
+        font-size:48px;
+    }
+    section{
+        padding:80px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+    <a href="#" class="logo">
+        <div class="logo-icon">T</div>
+        <span>MUSEUM TERNATE</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li><a href="#latar-belakang">Latar Belakang</a></li>
+        <li><a href="#tokoh">Tokoh</a></li>
+        <li><a href="#proses">Proses</a></li>
+        <li><a href="#dampak">Dampak</a></li>
+        <li><a href="#sumber">Sumber</a></li>
+    </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <p class="eyebrow">Digital Exhibition</p>
+        <h1>Perlawanan<br><span>Rakyat Ternate</span></h1>
+        <p class="hero-subtitle">
+            Rekam jejak perjuangan Kesultanan Ternate dalam mempertahankan kedaulatan, martabat, dan monopoli rempah dari dominasi Portugis hingga Kongsi Dagang VOC.
+        </p>
+        <div class="hero-buttons">
+            <a href="#proses" class="btn gold">Jelajahi Sejarah</a>
+            <a href="#tokoh" class="btn">Tokoh Utama</a>
+        </div>
+    </div>
+    <div class="hero-year">1570—1575</div>
+</section>
+
+<!-- SECTION 1 & 3: NAMA PERLAWANAN & LOKASI -->
+<section class="intro" id="lokasi">
+    <p class="section-label">01. Identitas & Medan Perang</p>
+    <h2 class="section-title">Perlawanan Ternate <span>& Lokasi Strategis</span></h2>
+    <p class="section-description">
+        Perjuangan armed penuh yang menguncang benteng kolonial Barat di Kepulauan Rempah-Rempah Maluku Utara.
+    </p>
+
+    <div class="intro-grid">
+        <div class="museum-card">
+            <div class="card-number">01</div>
+            <h3>Perlawanan Rakyat Ternate</h3>
+            <p>
+                Perjuangan kolektif Kesultanan Ternate menghadapi ekspansi militer dan monopoli cengkih Portugis (1570–1575) serta armada patroli monopoli VOC (abad ke-17).
+            </p>
+        </div>
+
+        <div>
+            <p class="section-label" style="color:#80652f;">03. Lokasi Utama</p>
+            <ul class="location-list">
+                <li><strong>Pulau Ternate:</strong> Pusat pertahanan Benteng Gamlamo (Nossa Senhora da Anunciada)</li>
+                <li><strong>Kepulauan Maluku Utara:</strong> Tidore, Jailolo (Halmahera), dan Makian</li>
+                <li><strong>Kepulauan Ambon & Banda:</strong> Wilayah perluasan perang dan Ekspedisi Hongi</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4: LATAR BELAKANG -->
+<section class="background-section" id="latar-belakang">
+    <p class="section-label">04. Faktor Pemicu</p>
+    <h2 class="section-title">Latar Belakang <span>Perlawanan</span></h2>
+    <p class="section-description">
+        Kombinasi eksploitasi ekonomi, campur tangan politik, hingga tindak kekerasan kolonial memicu perlawanan semesta rakyat Ternate.
+    </p>
+
+    <div class="bg-grid">
+        <div class="bg-card">
+            <div class="bg-card-num">01 / EKONOMI</div>
+            <h3>Monopoli Rempah</h3>
+            <p>Pemaksaan sistem jual-beli tunggal cengkih dengan harga sepihak yang merugikan petani dan Kesultanan.</p>
+        </div>
+        <div class="bg-card">
+            <div class="bg-card-num">02 / POLITIK</div>
+            <h3>Devide et Impera</h3>
+            <p>Intervensi internal istana serta politik adu domba antara Kesultanan Ternate dan Kesultanan Tidore.</p>
+        </div>
+        <div class="bg-card">
+            <div class="bg-card-num">03 / AGAMA & ADAT</div>
+            <h3>Pelecehan Tradisi</h3>
+            <p>Sikap kasar, pemaksaan budaya Barat, serta ketidakpenghormatan terhadap adat dan nilai-nilai Islam lokal.</p>
+        </div>
+        <div class="bg-card">
+            <div class="bg-card-num">04 / INSIDEN KRUSIAL</div>
+            <h3>Pembunuhan Licik (1570)</h3>
+            <p>Pembunuhan Sultan Khairun secara khianat di dalam benteng Portugis saat merundingkan perdamaian.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 2: TOKOH-TOKOH UTAMA -->
+<section class="figures" id="tokoh">
+    <p class="section-label">02. Pemimpin Perjuangan</p>
+    <h2 class="section-title">Tokoh <span>Kunci</span></h2>
+
+    <div class="figures-grid">
+        <div class="figure">
+            <div class="figure-number">01 / SULTAN</div>
+            <h3>Sultan Khairun</h3>
+            <div class="role">Sultan Ternate XXIII (1535–1570)</div>
+            <p>Penyatu wilayah Maluku yang konsisten menolak monopoli Portugis. Gugur akibat pengkhianatan Gubernur Portugis Diogo Lopes de Mesquita.</p>
+        </div>
+
+        <div class="figure">
+            <div class="figure-number">02 / SULTAN</div>
+            <h3>Sultan Baabullah</h3>
+            <div class="role">Penguasa 72 Pulau (1570–1583)</div>
+            <p>Putra Sultan Khairun yang mengumandangkan perang total (*Jihad*). Berhasil mengusir Portugis dari Ternate secara permanen pada 1575.</p>
+        </div>
+
+        <div class="figure">
+            <div class="figure-number">03 / PEJUANG ERA VOC</div>
+            <h3>Sultan Said Din</h3>
+            <div class="role">Pemimpin Era VOC (Abad XVII)</div>
+            <p>Melancarkan perang gerilya laut menghadapi kebijakan *Hongitochten* dan pemusnahan tanaman cengkih (*ekstirpasi*) oleh Belanda.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 5: PROSES PERLAWANAN -->
+<section class="timeline" id="proses">
+    <p class="section-label">05. Alur Peristiwa</p>
+    <h2 class="section-title">Proses <span>Perlawanan</span></h2>
+
+    <div class="timeline-container">
+        <div class="timeline-item">
+            <div class="timeline-line"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">28 FEBRUARI 1570</div>
+            <h3>Pengkhianatan di Benteng Gamlamo</h3>
+            <p>Sultan Khairun diundang ke Benteng Nossa Senhora da Anunciada untuk menandatangani perjanjian damai, namun dibunuh secara licik oleh prajurit Portugis.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-line"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">1570 – 1575</div>
+            <h3>Sumpah Baabullah & Pengepungan Total</h3>
+            <p>Sultan Baabullah menyatukan Ternate, Tidore, Jailolo, dan Papua. Benteng Portugis dikepung ketat selama 5 tahun hingga memutus rantai pasokan logistik musuh.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-line"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">28 DESEMBER 1575</div>
+            <h3>Pengusiran Portugis dari Ternate</h3>
+            <p>Pasukan Portugis menyerah tanpa syarat akibat kelaparan. Mereka diizinkan pergi meninggalkan Ternate menuju Ambon dan Timor tanpa membawa senjata.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-line"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">ABAD XVII (ERA VOC)</div>
+            <h3>Perang Kora-Kora & Perlawanan Hongi</h3>
+            <p>Rakyat Ternate melancarkan perlawanan terhadap Pelayaran Hongi VOC dan menolak tindakan ekstirpasi (penebangan pohon cengkih) secara gerilya di lautan.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 6: DAMPAK -->
+<section class="impact" id="dampak">
+    <p class="section-label">06. Implikasi Sejarah</p>
+    <h2 class="section-title">Dampak <span>Perlawanan</span></h2>
+
+    <div class="impact-box">
+        <div class="impact-grid">
+            <div class="impact-point">
+                <span>01</span>
+                <h3>Puncak Kejayaan Ternate</h3>
+                <p>Terusirnya Portugis menjadikan Kesultanan Ternate sebagai kekuatan maritim berdaulat penuh di kawasan Pasifik Barat.</p>
+            </div>
+
+            <div class="impact-point">
+                <span>02</span>
+                <h3>Penyebaran Islam</h3>
+                <p>Pengaruh politik Ternate meluas hingga Sulawesi dan Filipina Selatan, mempercepat penyebaran agama Islam di wilayah kepulauan.</p>
+            </div>
+
+            <div class="impact-point">
+                <span>03</span>
+                <h3>Kerusakan Ekonomi VOC</h3>
+                <p>Kebijakan *ekstirpasi* dan pertempuran sengit era VOC mengakibatkan kemunduran ekonomi rakyat akibat pemusnaha
